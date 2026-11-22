@@ -1,0 +1,2008 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulado de Ciências para Liesel — 6º Ano | Matéria, Misturas e Saneamento</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Quicksand & Nunito -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Fun Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Nunito', 'sans-serif'],
+                        display: ['Quicksand', 'sans-serif'],
+                    },
+                    colors: {
+                        block1: { light: '#EEF2FF', border: '#818CF8', badge: '#4F46E5', text: '#3730A3' }, // Matéria (Indigo)
+                        block2: { light: '#E0F2FE', border: '#38BDF8', badge: '#0284C7', text: '#075985' }, // Estados (Sky)
+                        block3: { light: '#ECFDF5', border: '#34D399', badge: '#059669', text: '#065F46' }, // Substâncias (Emerald)
+                        block4: { light: '#FFFBEB', border: '#FBBF24', badge: '#D97706', text: '#92400E' }, // Misturas (Amber)
+                        block5: { light: '#FCE7F3', border: '#F472B6', badge: '#DB2777', text: '#9D174D' }, // Separação/ETA (Pink)
+                    },
+                    boxShadow: {
+                        'fun': '0 8px 0 0 rgba(0, 0, 0, 0.08)',
+                        'card': '0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01)',
+                        'pop': '0 20px 30px -10px rgba(0, 0, 0, 0.2)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #F8FAFC;
+            background-image: radial-gradient(#E2E8F0 1.5px, transparent 1.5px);
+            background-size: 24px 24px;
+        }
+
+        .btn-option {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-option:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        .btn-option:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        /* Animações personalizadas */
+        @keyframes popIn {
+            0% { transform: scale(0.9); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-pop-in {
+            animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        @keyframes bounceShort {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        .animate-bounce-short {
+            animation: bounceShort 0.4s ease-in-out;
+        }
+
+        /* Estilização da barra de rolagem */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F1F5F9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94A3B8;
+        }
+
+
+    /* Ajustes pontuais de responsividade para telas pequenas */
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+    html, body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+    #quiz-container,
+    #quiz-container > div,
+    #final-summary-card {
+        min-width: 0;
+        max-width: 100%;
+    }
+    .btn-option {
+        min-width: 0;
+        max-width: 100%;
+    }
+    .btn-option .flex-grow {
+        min-width: 0;
+        overflow-wrap: anywhere;
+        word-break: normal;
+    }
+    @media (max-width: 640px) {
+        header > div,
+        nav,
+        main,
+        #final-summary-card {
+            width: 100%;
+            max-width: 100%;
+        }
+        header h1 {
+            font-size: 1.05rem;
+            line-height: 1.25;
+            overflow-wrap: anywhere;
+        }
+        header .flex.items-center.gap-3 {
+            min-width: 0;
+        }
+        header .flex.items-center.gap-3 > div:last-child {
+            min-width: 0;
+        }
+        #quiz-container {
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+        }
+        #quiz-container > div[id^="card-q-"] {
+            padding: 1rem;
+            border-radius: 1.25rem;
+        }
+        #quiz-container h3 {
+            font-size: 1rem;
+            line-height: 1.45;
+            overflow-wrap: anywhere;
+        }
+        .btn-option {
+            padding: 0.8rem;
+            gap: 0.6rem;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        #quiz-container .flex.items-center.justify-between {
+            flex-wrap: wrap;
+        }
+    }
+
+    </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col justify-between pb-12">
+
+    <!-- CABEÇALHO FIXO E BARRA DE PROGRESSO -->
+    <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-5xl mx-auto px-4 py-3">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+                <!-- Título e Subtítulo -->
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-indigo-500 to-purple-500 flex items-center justify-center text-white text-2xl shadow-md shrink-0">
+                        🔬
+                    </div>
+                    <div>
+                        <h1 class="text-xl md:text-2xl font-black font-display text-slate-800 tracking-tight leading-none">
+                            Simulado de Ciências para:<span class="bg-gradient-to-r from-indigo-600 to-pink-600 bg-clip-text text-transparent"> Liesel do 6º Ano</span>
+                        </h1>
+                        <p class="text-xs text-slate-500 font-semibold mt-1">Matéria, Estados Físicos, Misturas & Saneamento</p>
+                    </div>
+                </div>
+
+                <!-- Placar e Botões Rápidos -->
+                <div class="flex items-center justify-between md:justify-end gap-3">
+                    <div class="flex items-center gap-2 bg-slate-100 p-1.5 rounded-xl border border-slate-200 text-xs font-bold">
+                        <div class="px-2.5 py-1 bg-emerald-500 text-white rounded-lg flex items-center gap-1 shadow-sm">
+                            <i class="fa-solid font-black fa-check text-xs"></i> <span id="score-correct">0</span>
+                        </div>
+                        <div class="px-2.5 py-1 bg-rose-500 text-white rounded-lg flex items-center gap-1 shadow-sm">
+                            <i class="fa-solid font-black fa-xmark text-xs"></i> <span id="score-wrong">0</span>
+                        </div>
+                        <div class="px-2.5 py-1 text-slate-600">
+                            <span id="score-total">0</span>/70
+                        </div>
+                    </div>
+
+                    <button onclick="openTipsModal()" class="px-3 py-2 bg-amber-100 hover:bg-amber-200 text-amber-800 rounded-xl text-xs font-bold transition flex items-center gap-1.5 border border-amber-300 shadow-sm">
+                        <span>💡</span> <span class="hidden sm:inline">Dicas de Ouro</span>
+                    </button>
+                    <button onclick="resetQuizWithConfirm()" class="px-3 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-xl text-xs font-bold transition flex items-center gap-1.5 border border-slate-300">
+                        <i class="fa-solid fa-rotate-right"></i> <span class="hidden sm:inline">Reiniciar</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Barra de Progresso Dinâmica -->
+            <div class="mt-3">
+                <div class="flex justify-between items-center text-xs font-bold text-slate-500 mb-1">
+                    <span>Seu Progresso no Simulado</span>
+                    <span id="progress-text">0% Concluído</span>
+                </div>
+                <div class="w-full h-3 bg-slate-200 rounded-full overflow-hidden p-0.5 border border-slate-300/50">
+                    <div id="progress-bar" class="h-full bg-gradient-to-r from-indigo-500 via-sky-400 to-emerald-400 rounded-full transition-all duration-500 w-0"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- NAVEGAÇÃO RÁPIDA DE BLOCOS -->
+    <nav class="max-w-5xl mx-auto px-4 mt-6">
+        <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none text-xs font-bold">
+            <button onclick="scrollToBlock('block-1')" class="px-3 py-2 rounded-xl bg-indigo-100 text-indigo-800 hover:bg-indigo-200 border border-indigo-300 whitespace-nowrap transition flex items-center gap-1.5">
+                <span>🟣</span> Bloco 1: Matéria
+            </button>
+            <button onclick="scrollToBlock('block-2')" class="px-3 py-2 rounded-xl bg-sky-100 text-sky-800 hover:bg-sky-200 border border-sky-300 whitespace-nowrap transition flex items-center gap-1.5">
+                <span>🧊</span> Bloco 2: Estados Físicos
+            </button>
+            <button onclick="scrollToBlock('block-3')" class="px-3 py-2 rounded-xl bg-emerald-100 text-emerald-800 hover:bg-emerald-200 border border-emerald-300 whitespace-nowrap transition flex items-center gap-1.5">
+                <span>🧪</span> Bloco 3: Substâncias Puras
+            </button>
+            <button onclick="scrollToBlock('block-4')" class="px-3 py-2 rounded-xl bg-amber-100 text-amber-800 hover:bg-amber-200 border border-amber-300 whitespace-nowrap transition flex items-center gap-1.5">
+                <span>🥣</span> Bloco 4: Misturas e Fases
+            </button>
+            <button onclick="scrollToBlock('block-5')" class="px-3 py-2 rounded-xl bg-pink-100 text-pink-800 hover:bg-pink-200 border border-pink-300 whitespace-nowrap transition flex items-center gap-1.5">
+                <span>🚰</span> Bloco 5: Separação e ETA/ETE
+            </button>
+        </div>
+    </nav>
+
+    <!-- CONTEÚDO PRINCIPAL (QUESTÕES) -->
+    <main class="max-w-5xl mx-auto px-4 mt-4 space-y-10 flex-grow" id="quiz-container">
+        <!-- As 70 questões serão inseridas dinamicamente via JS para manter o código limpo, moderno e performático -->
+    </main>
+
+    <!-- RESUMO FINAL (ESCONDIDO INICIALMENTE) -->
+    <section id="final-summary-card" class="max-w-5xl mx-auto px-4 mt-8 hidden">
+        <div class="bg-gradient-to-br from-indigo-900 via-indigo-800 to-purple-900 rounded-3xl p-6 sm:p-10 text-white shadow-2xl relative overflow-hidden border-4 border-indigo-400">
+            <div class="absolute top-0 right-0 -mt-10 -mr-10 w-48 h-48 bg-pink-500/20 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="text-center max-w-2xl mx-auto relative z-10 space-y-4">
+                <div class="inline-block p-4 bg-white/10 rounded-full backdrop-blur-md text-5xl mb-2 animate-bounce">
+                    🏆
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-black font-display tracking-tight text-amber-300" id="summary-title">
+                    Simulado Concluído!
+                </h2>
+                <p class="text-slate-200 text-base sm:text-lg font-medium" id="summary-message">
+                    Parabéns pelo empenho e dedicação! Veja abaixo o seu resultado completo.
+                </p>
+
+                <!-- Placar Final Grande -->
+                <div class="grid grid-cols-3 gap-3 max-w-md mx-auto my-6">
+                    <div class="bg-white/10 backdrop-blur-sm p-4 rounded-2xl border border-white/20">
+                        <span class="block text-2xl sm:text-3xl font-black text-emerald-400" id="summary-correct">0</span>
+                        <span class="text-xs text-slate-300 uppercase font-bold tracking-wider">Acertos</span>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm p-4 rounded-2xl border border-white/20">
+                        <span class="block text-2xl sm:text-3xl font-black text-rose-400" id="summary-wrong">0</span>
+                        <span class="text-xs text-slate-300 uppercase font-bold tracking-wider">Erros</span>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm p-4 rounded-2xl border border-white/20">
+                        <span class="block text-2xl sm:text-3xl font-black text-amber-300" id="summary-score">0%</span>
+                        <span class="text-xs text-slate-300 uppercase font-bold tracking-wider">Aproveitamento</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-4 pt-4">
+                    <button onclick="resetQuiz()" class="px-6 py-3.5 bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-500 hover:to-teal-600 text-slate-900 font-extrabold rounded-2xl shadow-lg transition transform hover:-translate-y-1 flex items-center gap-2">
+                        <i class="fa-solid fa-arrow-rotate-left"></i> Refazer Simulado
+                    </button>
+                    <button onclick="openTipsModal()" class="px-6 py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-2xl backdrop-blur-sm border border-white/30 transition flex items-center gap-2">
+                        💡 Replicar Dicas de Ouro
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="mt-16 text-center text-xs text-slate-500 font-medium">
+        <p>Simulado Interativo de Ciências — 6º Ano do Ensino Fundamental • BNCC Alinhada</p>
+        <p class="mt-1 text-slate-400">Desenvolvido para um aprendizado divertido, dinâmico e eficaz 🚀</p>
+    </footer>
+
+    <!-- MODAL POPUP: EXPLICAÇÃO DA QUESTÃO -->
+    <div id="modal-explanation" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300">
+        <div class="bg-white rounded-3xl max-w-lg w-full shadow-pop overflow-hidden border border-slate-100 transform scale-95 transition-all duration-300" id="modal-exp-box">
+            <!-- Cabeçalho do Modal -->
+            <div id="modal-exp-header" class="p-5 bg-gradient-to-r from-indigo-500 to-purple-600 text-white flex justify-between items-center">
+                <div class="flex items-center gap-2.5">
+                    <span class="text-2xl">💡</span>
+                    <div>
+                        <h3 class="font-black text-lg font-display leading-tight" id="modal-exp-qnum">Explicação da Questão</h3>
+                        <p class="text-xs text-indigo-100 font-medium" id="modal-exp-block">Bloco Temático</p>
+                    </div>
+                </div>
+                <button onclick="closeExpModal()" class="w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 text-white flex items-center justify-center transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Corpo do Modal -->
+            <div class="p-6 space-y-4 max-h-[70vh] overflow-y-auto">
+                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">Enunciado:</span>
+                    <p class="font-bold text-slate-800 text-sm" id="modal-exp-prompt"></p>
+                </div>
+
+                <div class="space-y-2">
+                    <div class="flex items-start gap-2 p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-900 text-xs sm:text-sm font-semibold">
+                        <span class="text-emerald-600 font-bold shrink-0">✅ Resposta Correta:</span>
+                        <span id="modal-exp-correct"></span>
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider block mb-2 flex items-center gap-1">
+                        <i class="fa-solid fa-graduation-cap"></i> Por que essa é a resposta certa?
+                    </span>
+                    <div class="text-slate-700 text-sm leading-relaxed space-y-2 bg-indigo-50/50 p-4 rounded-2xl border border-indigo-100" id="modal-exp-text">
+                        <!-- Texto da explicação -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rodapé do Modal -->
+            <div class="p-4 bg-slate-50 border-t border-slate-100 flex justify-end">
+                <button onclick="closeExpModal()" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-extrabold rounded-xl transition shadow-md">
+                    Entendi! Continuar 🚀
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL POPUP: DICAS DE OURO PARA A PROVA -->
+    <div id="modal-tips" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300">
+        <div class="bg-white rounded-3xl max-w-2xl w-full shadow-pop overflow-hidden border border-slate-100 transform scale-95 transition-all duration-300" id="modal-tips-box">
+            <!-- Cabeçalho -->
+            <div class="p-5 bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 text-white flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center text-2xl">
+                        👑
+                    </div>
+                    <div>
+                        <h3 class="font-black text-xl font-display leading-tight">Dicas de Ouro para Arrasar na Prova!</h3>
+                        <p class="text-xs text-amber-100 font-medium">Principais "pegadinhas" e conceitos essenciais do 6º Ano</p>
+                    </div>
+                </div>
+                <button onclick="closeTipsModal()" class="w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 text-white flex items-center justify-center transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Conteúdo das Dicas -->
+            <div class="p-6 space-y-4 max-h-[75vh] overflow-y-auto text-sm text-slate-700">
+                
+                <!-- Dica 1 -->
+                <div class="p-4 bg-indigo-50 border-l-4 border-indigo-500 rounded-r-2xl space-y-1">
+                    <h4 class="font-bold text-indigo-900 flex items-center gap-2">
+                        <span>⚛️</span> Átomo vs Elemento Químico vs Componente
+                    </h4>
+                    <p class="text-xs leading-relaxed text-indigo-950">
+                        <strong>Átomo</strong> é a unidade estrutural básica (a partícula individual). <br>
+                        <strong>Elemento Químico</strong> é a "identidade" do átomo (ex: Hidrogênio, Oxigênio). <br>
+                        <strong>Componente</strong> é a substância/ingrediente presente numa mistura (ex: na mistura de água e sal, a água é 1 componente e o sal é outro).
+                    </p>
+                </div>
+
+                <!-- Dica 2 -->
+                <div class="p-4 bg-sky-50 border-l-4 border-sky-500 rounded-r-2xl space-y-1">
+                    <h4 class="font-bold text-sky-900 flex items-center gap-2">
+                        <span>👁️</span> Componentes vs Fases (Não confunda!)
+                    </h4>
+                    <p class="text-xs leading-relaxed text-sky-950">
+                        <strong>Componentes</strong> = Quantos ingredientes foram colocados. <br>
+                        <strong>Fases</strong> = Quantas partes visivelmente diferentes você consegue enxergar. <br>
+                        <em>Exemplo Clássico:</em> <strong>Água líquida + Cubos de Gelo</strong> têm 1 único componente (H₂O), mas apresentam <strong>2 fases</strong> (uma líquida e uma sólida)!
+                    </p>
+                </div>
+
+                <!-- Dica 3 -->
+                <div class="p-4 bg-amber-50 border-l-4 border-amber-500 rounded-r-2xl space-y-1">
+                    <h4 class="font-bold text-amber-900 flex items-center gap-2">
+                        <span>🔬</span> A Pegadinha do Sangue e do Leite!
+                    </h4>
+                    <p class="text-xs leading-relaxed text-amber-950">
+                        A olho nu, o sangue e o leite parecem perfeitamente uniformes (homogêneos). Mas ao olhar no <strong>microscópio</strong>, vemos células e gotículas de gordura flutuando! Portanto, biologicamente e quimicamente, o <strong>sangue e o leite são misturas HETEROGÊNEAS</strong>.
+                    </p>
+                </div>
+
+                <!-- Dica 4 -->
+                <div class="p-4 bg-emerald-50 border-l-4 border-emerald-500 rounded-r-2xl space-y-1">
+                    <h4 class="font-bold text-emerald-900 flex items-center gap-2">
+                        <span>⏳</span> Sedimentação vs Decantação
+                    </h4>
+                    <p class="text-xs leading-relaxed text-emerald-950">
+                        <strong>Sedimentação:</strong> É a ação da gravidade fazendo o sólido pesado depositar no fundo (ex: esperar a terra afundar na água em repouso). <br>
+                        <strong>Decantação:</strong> É o ato físico de <em>separar ou verter</em> o líquido limpo de cima, deixando o sólido no fundo, ou separar líquidos imiscíveis (água e óleo).
+                    </p>
+                </div>
+
+                <!-- Dica 5 -->
+                <div class="p-4 bg-pink-50 border-l-4 border-pink-500 rounded-r-2xl space-y-1">
+                    <h4 class="font-bold text-pink-900 flex items-center gap-2">
+                        <span>🚰</span> ETA vs ETE vs Biogás
+                    </h4>
+                    <p class="text-xs leading-relaxed text-pink-950">
+                        <strong>ETA (Estação de Tratamento de Água):</strong> Limpa a água bruta retirada da natureza (rios/represas) para torná-la POTÁVEL antes de ir para a torneira da população. <br>
+                        <strong>ETE (Estação de Tratamento de Esgoto):</strong> Trata a água suja e efluentes usados pela cidade antes de devolvê-los com segurança ao meio ambiente. <br>
+                        <strong>Biogás:</strong> Gás renovável produzido por bactérias anaeróbicas que decompõem matéria orgânica no esgoto ou lixo. Seu principal componente é o <strong>Metano (CH₄)</strong>.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Rodapé -->
+            <div class="p-4 bg-slate-50 border-t border-slate-100 flex justify-end">
+                <button onclick="closeTipsModal()" class="px-6 py-2.5 bg-amber-500 hover:bg-amber-600 text-white font-black text-xs rounded-xl shadow-md transition">
+                    Fechar Dicas e Fazer o Simulado! ⭐
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- JAVASCRIPT LÓGICO E INTERATIVIDADE -->
+    <script>
+        /* ==========================================================================
+           BANCO DE DADOS DAS 70 QUESTÕES DIVIDIDAS EM 5 BLOCOS TEMÁTICOS
+           ========================================================================== */
+        const quizQuestions = [
+            // BLOCO 1: MATÉRIA E SUAS PROPRIEDADES (Q1 a Q6)
+            {
+                id: 1,
+                blockId: "block-1",
+                blockTitle: "Bloco 1: Matéria e suas Propriedades",
+                blockBadge: "Matéria & Propriedades",
+                theme: "block1",
+                icon: "🟣",
+                prompt: "O que é MATÉRIA de acordo com os conceitos da Ciência?",
+                options: [
+                    "Tudo aquilo que possui massa e ocupa lugar no espaço.",
+                    "Apenas os objetos sólidos e duros que conseguimos ver e tocar.",
+                    "A energia liberada pelo Sol, pelo fogo e pelas lâmpadas.",
+                    "Tudo aquilo que não tem peso nem volume definido."
+                ],
+                correct: 0,
+                explanation: "Matéria é a definição fundamental na Ciência: qualquer entidade que possui massa e ocupa um volume no espaço. Exemplos incluem o ar que respiramos, a água, as pedras e até as estrelas. Energia (como luz e calor) não é matéria."
+            },
+            {
+                id: 2,
+                blockId: "block-1",
+                blockTitle: "Bloco 1: Matéria e suas Propriedades",
+                blockBadge: "Matéria & Propriedades",
+                theme: "block1",
+                icon: "🟣",
+                prompt: "Qual das alternativas a seguir apresenta APENAS exemplos de MATÉRIA?",
+                options: [
+                    "Luz solar, som e calor do fogo.",
+                    "Água líquida, ar atmosférico e uma pedra de granito.",
+                    "Amor, pensamento e raio de luz.",
+                    "Vácuo espacial, energia elétrica e som."
+                ],
+                correct: 1,
+                explanation: "Água, ar e pedra possuem massa e ocupam espaço (são matérias). Luz, som, calor e pensamentos são formas de energia ou abstrações, não possuindo massa nem volume físico."
+            },
+            {
+                id: 3,
+                blockId: "block-1",
+                blockTitle: "Bloco 1: Matéria e suas Propriedades",
+                blockBadge: "Matéria & Propriedades",
+                theme: "block1",
+                icon: "🟣",
+                prompt: "A propriedade específica da matéria que mede a resistência de um material ao risco ou arranhão na sua superfície é chamada de:",
+                options: [
+                    "Elasticidade.",
+                    "Dureza.",
+                    "Densidade.",
+                    "Solubilidade."
+                ],
+                correct: 1,
+                explanation: "A Dureza indica a resistência que um material oferece ao ser riscado por outro. Na natureza, o diamante é o mineral mais duro conhecido, pois consegue riscar quase qualquer outro material."
+            },
+            {
+                id: 4,
+                blockId: "block-1",
+                blockTitle: "Bloco 1: Matéria e suas Propriedades",
+                blockBadge: "Matéria & Propriedades",
+                theme: "block1",
+                icon: "🟣",
+                prompt: "Quando um pedaço de madeira flutua na água enquanto uma moeda de ferro afunda, isso acontece por causa da diferença de:",
+                options: [
+                    "Dureza entre o ferro e a água.",
+                    "Temperatura da madeira e da moeda.",
+                    "Densidade dos materiais em relação à água.",
+                    "Solubilidade da madeira em meio líquido."
+                ],
+                correct: 2,
+                explanation: "A Densidade é a relação entre a massa e o volume de um corpo (d = m/V). Materiais com densidade menor que a da água (como a madeira ou óleo) flutuam; materiais com densidade maior (como o ferro) afundam."
+            },
+            {
+                id: 5,
+                blockId: "block-1",
+                blockTitle: "Bloco 1: Matéria e suas Propriedades",
+                blockBadge: "Matéria & Propriedades",
+                theme: "block1",
+                icon: "🟣",
+                prompt: "A quantidade de matéria presente em um determinado corpo é medida normalmente em quilogramas (kg) ou gramas (g) e é chamada de:",
+                options: [
+                    "Volume.",
+                    "Massa.",
+                    "Pressão.",
+                    "Temperatura."
+                ],
+                correct: 1,
+                explanation: "Massa é a quantidade de matéria que compõe um corpo, medida com auxílio de uma balança em gramas (g) ou quilogramas (kg). O volume representa o espaço total ocupado por essa massa."
+            },
+            {
+                id: 6,
+                blockId: "block-1",
+                blockTitle: "Bloco 1: Matéria e suas Propriedades",
+                blockBadge: "Matéria & Propriedades",
+                theme: "block1",
+                icon: "🟣",
+                prompt: "A capacidade de uma substância (como o sal ou açúcar) se dissolver completamente em outra (como a água) é a propriedade chamada:",
+                options: [
+                    "Tenacidade.",
+                    "Ductilidade.",
+                    "Solubilidade.",
+                    "Combustibilidade."
+                ],
+                correct: 2,
+                explanation: "Solubilidade é a capacidade de uma substância (soluto) se misturar de forma homogênea em um líquido (solvente). A água é considerada o solvente universal na Terra!"
+            },
+
+            // BLOCO 2: ESTADOS FÍSICOS E MUDANÇAS DE ESTADO (Q7 a Q12)
+            {
+                id: 7,
+                blockId: "block-2",
+                blockTitle: "Bloco 2: Estados Físicos e Mudanças de Estado",
+                blockBadge: "Estados Físicos",
+                theme: "block2",
+                icon: "🧊",
+                prompt: "As partículas (átomos/moléculas) estão muito bem organizadas, fortemente unidas e praticamente sem liberdade de movimento no estado:",
+                options: [
+                    "Líquido.",
+                    "Gasoso.",
+                    "Sólido.",
+                    "Plasmático."
+                ],
+                correct: 2,
+                explanation: "No estado SÓLIDO, as forças de atração intermoleculares são muito intensas. Por isso, os corpos sólidos possuem forma própria e volume fixo e bem definido."
+            },
+            {
+                id: 8,
+                blockId: "block-2",
+                blockTitle: "Bloco 2: Estados Físicos e Mudanças de Estado",
+                blockBadge: "Estados Físicos",
+                theme: "block2",
+                icon: "🧊",
+                prompt: "A passagem direta de uma substância do estado SÓLIDO para o estado GASOSO, sem passar pelo estado líquido (como ocorre com a naftalina e o gelo seco), chama-se:",
+                options: [
+                    "Fusão.",
+                    "Solidificação.",
+                    "Sublimação.",
+                    "Condensação."
+                ],
+                correct: 2,
+                explanation: "Sublimação é a transição direta do estado sólido para o gasoso (ou vice-versa). O gelo seco (dióxido de carbono sólido) vira gás rapidamente à temperatura ambiente por sublimação."
+            },
+            {
+                id: 9,
+                blockId: "block-2",
+                blockTitle: "Bloco 2: Estados Físicos e Mudanças de Estado",
+                blockBadge: "Estados Físicos",
+                theme: "block2",
+                icon: "🧊",
+                prompt: "Durante um banho quente, o vapor de água sobe e toca o espelho frio, formando gotículas de água líquida. Essa mudança de gás/vapor para líquido é a:",
+                options: [
+                    "Evaporação.",
+                    "Condensação (ou Liquefação).",
+                    "Fusão.",
+                    "Ebulição."
+                ],
+                correct: 1,
+                explanation: "Condensação (ou Liquefação) ocorre quando o vapor ou gás perde calor ao entrar em contato com uma superfície ou ambiente mais frio, retornando ao estado líquido."
+            },
+            {
+                id: 10,
+                blockId: "block-2",
+                blockTitle: "Bloco 2: Estados Físicos e Mudanças de Estado",
+                blockBadge: "Estados Físicos",
+                theme: "block2",
+                icon: "🧊",
+                prompt: "O derretimento de um picolé ou de um cubo de gelo quando expostos ao calor é um exemplo clássico da mudança de estado chamada:",
+                options: [
+                    "Fusão.",
+                    "Solidificação.",
+                    "Vaporização.",
+                    "Sublimação."
+                ],
+                correct: 0,
+                explanation: "Fusão é a passagem da matéria do estado sólido para o estado líquido que ocorre quando a substância ganha energia térmica (calor)."
+            },
+            {
+                id: 11,
+                blockId: "block-2",
+                blockTitle: "Bloco 2: Estados Físicos e Mudanças de Estado",
+                blockBadge: "Estados Físicos",
+                theme: "block2",
+                icon: "🧊",
+                prompt: "Qual é a principal diferença entre EVAPORAÇÃO e EBULIÇÃO (duas formas de vaporização)?",
+                options: [
+                    "A evaporação é rápida e gera bolhas; a ebulição é lenta e imperceptível.",
+                    "A evaporação é um processo lento e ocorre na superfície; a ebulição é rápida, turbulenta e gera bolhas em todo o líquido.",
+                    "Evaporação só acontece no congelador e ebulição acontece no sol.",
+                    "Não existe nenhuma diferença entre elas."
+                ],
+                correct: 1,
+                explanation: "Evaporação é a vaporização lenta e natural que ocorre apenas na superfície (ex: roupa secando no varal). Ebulição é rápida e tumultuada, ocorrendo em toda a massa do líquido a uma temperatura fixa (ex: água fervendo a 100°C)."
+            },
+            {
+                id: 12,
+                blockId: "block-2",
+                blockTitle: "Bloco 2: Estados Físicos e Mudanças de Estado",
+                blockBadge: "Estados Físicos",
+                theme: "block2",
+                icon: "🧊",
+                prompt: "Quando uma poça de água da chuva secando na calçada num dia ensolarado 'desaparece' gradualmente, a água passou pelo processo de:",
+                options: [
+                    "Calefação.",
+                    "Solidificação.",
+                    "Evaporação.",
+                    "Condensação."
+                ],
+                correct: 2,
+                explanation: "A água líquida da poça absorve calor do sol e do ambiente e vai se transformando lentamente em vapor de água por evaporação."
+            },
+
+            // BLOCO 3: SUBSTÂNCIAS PURAS E ELEMENTOS (Q13 a Q18)
+            {
+                id: 13,
+                blockId: "block-3",
+                blockTitle: "Bloco 3: Substâncias Puras e Elementos Químicos",
+                blockBadge: "Substâncias Puras",
+                theme: "block3",
+                icon: "🧪",
+                prompt: "Uma substância formada por moléculas contendo APENAS UM TIPO de elemento químico (como o Gás Oxigênio - O₂) é classificada como:",
+                options: [
+                    "Substância Pura Simples.",
+                    "Substância Pura Composta.",
+                    "Mistura Heterogênea.",
+                    "Solução Aquosa."
+                ],
+                correct: 0,
+                explanation: "Substâncias simples são formadas por átomos de um mesmo elemento químico (ex: O₂ - gás oxigênio, H₂ - gás hidrogênio, N₂ - gás nitrogênio, Fe - ferro puro)."
+            },
+            {
+                id: 14,
+                blockId: "block-3",
+                blockTitle: "Bloco 3: Substâncias Puras e Elementos Químicos",
+                blockBadge: "Substâncias Puras",
+                theme: "block3",
+                icon: "🧪",
+                prompt: "A molécula de água pura tem fórmula H₂O (dois átomos de Hidrogênio e um de Oxigênio). Por conter elementos diferentes, a água pura é uma:",
+                options: [
+                    "Substância Pura Simples.",
+                    "Substância Pura Composta.",
+                    "Mistura Heterogênea.",
+                    "Mistura Trifásica."
+                ],
+                correct: 1,
+                explanation: "Substâncias compostas são aquelas cujas moléculas são formadas por dois ou mais elementos químicos diferentes ligados quimicamente (ex: H₂O - água, CO₂ - gás carbônico, NaCl - sal)."
+            },
+            {
+                id: 15,
+                blockId: "block-3",
+                blockTitle: "Bloco 3: Substâncias Puras e Elementos Químicos",
+                blockBadge: "Substâncias Puras",
+                theme: "block3",
+                icon: "🧪",
+                prompt: "Qual das opções a seguir apresenta APENAS exemplos de SUBSTÂNCIAS SIMPLES?",
+                options: [
+                    "Água (H₂O) e Dióxido de Carbono (CO₂).",
+                    "Gás Oxigênio (O₂) e Ferro Metálico (Fe).",
+                    "Sal de Cozinha (NaCl) e Açúcar (C₁₂H₂₂O₁₁).",
+                    "Vinagre e Ar Atmosférico."
+                ],
+                correct: 1,
+                explanation: "O₂ contém somente o elemento Oxigênio e Fe contém somente o elemento Ferro. Portanto, ambos são substâncias puras simples."
+            },
+            {
+                id: 16,
+                blockId: "block-3",
+                blockTitle: "Bloco 3: Substâncias Puras e Elementos Químicos",
+                blockBadge: "Substâncias Puras",
+                theme: "block3",
+                icon: "🧪",
+                prompt: "Um conjunto de átomos que possuem a mesma quantidade de prótons e a mesma identidade química (representados por símbolos como H, O, C, Fe) constitui um:",
+                options: [
+                    "Componente físico.",
+                    "Elemento químico.",
+                    "Estado de agregação.",
+                    "Filtro de separação."
+                ],
+                correct: 1,
+                explanation: "Elemento Químico é o conjunto de átomos com idêntico número atômico (prótons no núcleo). Eles constam organizados na Tabela Periódica."
+            },
+            {
+                id: 17,
+                blockId: "block-3",
+                blockTitle: "Bloco 3: Substâncias Puras e Elementos Químicos",
+                blockBadge: "Substâncias Puras",
+                theme: "block3",
+                icon: "🧪",
+                prompt: "Ao misturarmos água destilada e sal de cozinha até que o sal se dissolva completamente, o líquido resultante é:",
+                options: [
+                    "Uma substância pura simples.",
+                    "Uma mistura homogênea.",
+                    "Uma mistura heterogênea de duas fases.",
+                    "Um elemento químico líquido."
+                ],
+                correct: 1,
+                explanation: "Quando o sal se dissolve inteiramente na água, não é possível ver os grãos de sal. Forma-se um sistema uniforme de uma única fase (mistura homogênea ou solução)."
+            },
+            {
+                id: 18,
+                blockId: "block-3",
+                blockTitle: "Bloco 3: Substâncias Puras e Elementos Químicos",
+                blockBadge: "Substâncias Puras",
+                theme: "block3",
+                icon: "🧪",
+                prompt: "💡 Dica de Ouro: Qual é a principal diferença entre um ÁTOMO e um ELEMENTO QUÍMICO?",
+                options: [
+                    "O átomo é gigante e o elemento químico é invisível a olho nu.",
+                    "Átomo é a unidade individual física da matéria; Elemento Químico é a 'categoria/espécie' desses átomos.",
+                    "Átomos só formam sólidos e elementos químicos só formam gases.",
+                    "Não existe diferença, são palavras idênticas em tudo."
+                ],
+                correct: 1,
+                explanation: "Átomo é a partícula física em si (um tijolinho). Elemento químico é a 'família' ou espécie a que o átomo pertence (ex: tijolo de Hidrogênio, tijolo de Oxigênio)."
+            },
+
+            // BLOCO 4: MISTURAS E FASES (Q19 a Q24)
+            {
+                id: 19,
+                blockId: "block-4",
+                blockTitle: "Bloco 4: Misturas e Conceito de Fases",
+                blockBadge: "Misturas & Fases",
+                theme: "block4",
+                icon: "🥣",
+                prompt: "Uma mistura que apresenta um aspecto totalmente uniforme em toda a sua extensão, possuindo APENAS 1 FASE visível, é chamada de:",
+                options: [
+                    "Heterogênea.",
+                    "Homogênea (ou Solução).",
+                    "Trifásica.",
+                    "Suspensão densa."
+                ],
+                correct: 1,
+                explanation: "Misturas homogêneas têm aspecto uniforme em toda sua extensão e contêm apenas 1 fase (ex: água com um pouco de açúcar dissolvido, ar atmosférico filtrado)."
+            },
+            {
+                id: 20,
+                blockId: "block-4",
+                blockTitle: "Bloco 4: Misturas e Conceito de Fases",
+                blockBadge: "Misturas & Fases",
+                theme: "block4",
+                icon: "🥣",
+                prompt: "Um copo transparente contendo ÁGUA, ÓLEO DE COZINHA e AREIA no fundo apresenta quantas FASES e quantos COMPONENTES?",
+                options: [
+                    "2 fases e 3 componentes.",
+                    "3 fases e 3 componentes.",
+                    "1 fase e 3 componentes.",
+                    "3 fases e 2 componentes."
+                ],
+                correct: 1,
+                explanation: "São 3 componentes (água, óleo e areia) e 3 fases visíveis (a areia no fundo, a água no meio e o óleo flutuando no topo)."
+            },
+            {
+                id: 21,
+                blockId: "block-4",
+                blockTitle: "Bloco 4: Misturas e Conceito de Fases",
+                blockBadge: "Misturas & Fases",
+                theme: "block4",
+                icon: "🥣",
+                prompt: "⚠️ ATENÇÃO À PEGADINHA: Qual das opções abaixo é uma MISTURA HETEROGÊNEA quando analisada ao microscópio?",
+                options: [
+                    "Mistura de água e álcool puro.",
+                    "Sangue humano.",
+                    "Ar atmosférico limpo.",
+                    "Vinagre comercial."
+                ],
+                correct: 1,
+                explanation: "A olho nu o sangue parece homogêneo, mas no microscópio é possível ver o plasma líquido e as células (glóbulos vermelhos, brancos e plaquetas). Logo, o sangue é HETEROGÊNEO!"
+            },
+            {
+                id: 22,
+                blockId: "block-4",
+                blockTitle: "Bloco 4: Misturas e Conceito de Fases",
+                blockBadge: "Misturas & Fases",
+                theme: "block4",
+                icon: "🥣",
+                prompt: "O granito é uma rocha formada por três minerais visíveis com cores distintas: quartzo, feldspato e mica. O granito é:",
+                options: [
+                    "Uma substância pura simples.",
+                    "Uma mistura homogênea monofásica.",
+                    "Uma mistura heterogênea trifásica.",
+                    "Um elemento químico rochoso."
+                ],
+                correct: 2,
+                explanation: "Por apresentar 3 componentes minerais perfeitamente visíveis a olho nu com cores e pontos diferentes, o granito é uma mistura heterogênea com 3 fases (trifásica)."
+            },
+            {
+                id: 23,
+                blockId: "block-4",
+                blockTitle: "Bloco 4: Misturas e Conceito de Fases",
+                blockBadge: "Misturas & Fases",
+                theme: "block4",
+                icon: "🥣",
+                prompt: "A água mineral potável que compramos em garrafas é classificada cientificamente como:",
+                options: [
+                    "Substância pura simples.",
+                    "Substância pura composta.",
+                    "Mistura homogênea (água + sais minerais dissolvidos).",
+                    "Mistura heterogênea multifásica."
+                ],
+                correct: 2,
+                explanation: "A água mineral não é 100% água pura H₂O; ela possui diversos sais minerais dissolvidos (cálcio, magnésio, sódio) formando uma mistura homogênea transparente de 1 fase."
+            },
+            {
+                id: 24,
+                blockId: "block-4",
+                blockTitle: "Bloco 4: Misturas e Conceito de Fases",
+                blockBadge: "Misturas & Fases",
+                theme: "block4",
+                icon: "🥣",
+                prompt: "💡 Dica de Ouro: Qual é a diferença entre COMPONENTE e FASE numa mistura?",
+                options: [
+                    "Componentes são as substâncias adicionadas; Fase é cada porção uniforme visualmente distinguível.",
+                    "Componentes são líquidos e Fases são sólidos.",
+                    "Componentes são as cores e Fases são os recipientes usados.",
+                    "São conceitos idênticos e significam a mesma coisa."
+                ],
+                correct: 0,
+                explanation: "Componente é a substância química presente na mistura. Fase é a camada/porção visualmente homogênea. Exemplo: Água + Gelo tem 1 componente (água) e 2 fases (líquida e sólida)."
+            },
+
+            // BLOCO 5: SEPARAÇÃO DE MISTURAS, ETA, ETE E BIOGÁS (Q25 a Q30)
+            {
+                id: 25,
+                blockId: "block-5",
+                blockTitle: "Bloco 5: Separação de Misturas, ETA, ETE e Biogás",
+                blockBadge: "Separação & Saneamento",
+                theme: "block5",
+                icon: "🚰",
+                prompt: "Para separar uma mistura de ÁGUA e AREIA em um laboratório, retendo a areia sólida e deixando a água passar, o método mais indicado é a:",
+                options: [
+                    "Destilação fracionada.",
+                    "Filtração.",
+                    "Catação.",
+                    "Evaporação acelerada."
+                ],
+                correct: 1,
+                explanation: "A Filtração usa um meio poroso (como papel de filtro) que segura o sólido insolúvel (areia) enquanto deixa o líquido (água) passar."
+            },
+            {
+                id: 26,
+                blockId: "block-5",
+                blockTitle: "Bloco 5: Separação de Misturas, ETA, ETE e Biogás",
+                blockBadge: "Separação & Saneamento",
+                theme: "block5",
+                icon: "🚰",
+                prompt: "Ao fazer um café, a água quente passa pelo pó de café no filtro de papel. O pó fica retido no papel e a bebida sai limpa. Esse método de separação é a:",
+                options: [
+                    "Decantação.",
+                    "Filtração.",
+                    "Centrifugação.",
+                    "Flotação."
+                ],
+                correct: 1,
+                explanation: "A água quente extrai substâncias solúveis do pó e o papel de filtro separa a borra de café sólida e insolúvel da bebida por Filtração."
+            },
+            {
+                id: 27,
+                blockId: "block-5",
+                blockTitle: "Bloco 5: Separação de Misturas, ETA, ETE e Biogás",
+                blockBadge: "Separação & Saneamento",
+                theme: "block5",
+                icon: "🚰",
+                prompt: "Na Estação de Tratamento de Água (ETA), a etapa de COAGULAÇÃO / FLOCULAÇÃO serve para:",
+                options: [
+                    "Adicionar cloro para matar germes e vírus.",
+                    "Fazer com que pequenas partículas de sujeira se juntem em flocos maiores e mais pesados.",
+                    "Ferver toda a água do rio até virar vapor.",
+                    "Retirar o sal da água do mar."
+                ],
+                correct: 1,
+                explanation: "Adiciona-se um coagulante (como sulfato de alumínio) para aglomerar as impurezas muito finas em 'flocos' maiores que conseguem afundar facilmente na etapa seguinte de decantação."
+            },
+            {
+                id: 28,
+                blockId: "block-5",
+                blockTitle: "Bloco 5: Separação de Misturas, ETA, ETE e Biogás",
+                blockBadge: "Separação & Saneamento",
+                theme: "block5",
+                icon: "🚰",
+                prompt: "Qual é a diferença fundamental entre uma ETA (Estação de Tratamento de Água) e uma ETE (Estação de Tratamento de Esgoto)?",
+                options: [
+                    "A ETA trata a água do rio para tornar potável para o consumo; a ETE trata o esgoto usado das casas antes de devolvê-lo ao meio ambiente.",
+                    "A ETA cuida do lixo seco e a ETE cuida do lixo hospitalar.",
+                    "A ETA usa gelo para limpar e a ETE usa apenas sol.",
+                    "Ambas são exatamente a mesma coisa sem nenhuma diferença."
+                ],
+                correct: 0,
+                explanation: "ETA prepara a água bruta para nós bebermos com segurança nas torneiras. ETE limpa o esgoto produzido pelas nossas casas e indústrias antes de lançá-lo de volta aos rios para não poluir a natureza."
+            },
+            {
+                id: 29,
+                blockId: "block-5",
+                blockTitle: "Bloco 5: Separação de Misturas, ETA, ETE e Biogás",
+                blockBadge: "Separação & Saneamento",
+                theme: "block5",
+                icon: "🚰",
+                prompt: "Na ETE ou em biodigestores, bactérias decompositoras digerem a matéria orgânica na ausência de oxigênio e produzem o BIOGÁS. Seu principal gás combustível é o:",
+                options: [
+                    "Oxigênio (O₂).",
+                    "Metano (CH₄).",
+                    "Nitrogênio (N₂).",
+                    "Hélio (He)."
+                ],
+                correct: 1,
+                explanation: "O gás Metano (CH₄) é o componente principal do Biogás. Ele é um combustível renovável muito importante que pode ser usado para gerar energia elétrica ou calor!"
+            },
+            {
+                id: 30,
+                blockId: "block-5",
+                blockTitle: "Bloco 5: Separação de Misturas, ETA, ETE e Biogás",
+                blockBadge: "Separação & Saneamento",
+                theme: "block5",
+                icon: "🚰",
+                prompt: "Para separar uma mistura de dois líquidos miscíveis (como ÁGUA e ÁLCOOL) aproveitando a diferença de suas temperaturas de ebulição, utilizamos a:",
+                options: [
+                    "Catação.",
+                    "Peneiração.",
+                    "Destilação (Simples ou Fracionada).",
+                    "Filtração simples."
+                ],
+                correct: 2,
+                explanation: "A Destilação aquece a mistura: o líquido com menor ponto de ebulição (álcool) ferve e vira vapor primeiro, passando pelo condensador onde resfria e é recolhido em outro recipiente."
+            },
+            {
+    "id": 31,
+    "blockId": "block-6",
+    "blockTitle": "Bloco 6: Matéria e suas Propriedades",
+    "blockBadge": "Matéria & Propriedades",
+    "theme": "block1",
+    "icon": "🟣",
+    "prompt": "Qual definição melhor descreve a matéria?",
+    "options": [
+        "Tudo aquilo que apresenta massa e ocupa espaço.",
+        "Tudo aquilo que emite luz.",
+        "Somente aquilo que podemos tocar.",
+        "Apenas os materiais sólidos."
+    ],
+    "correct": 0,
+    "explanation": "Matéria é tudo que possui massa e ocupa lugar no espaço. O ar, embora não possa ser visto, é matéria porque tem massa e ocupa volume."
+},
+            {
+    "id": 32,
+    "blockId": "block-6",
+    "blockTitle": "Bloco 6: Matéria e suas Propriedades",
+    "blockBadge": "Matéria & Propriedades",
+    "theme": "block1",
+    "icon": "🟣",
+    "prompt": "Um balão cheio pesa mais do que o mesmo balão vazio. Qual explicação está correta?",
+    "options": [
+        "O ar dentro do balão possui massa.",
+        "O ar transforma o balão em um sólido.",
+        "O balão vazio não possui volume.",
+        "A luz que entra no balão aumenta seu peso."
+    ],
+    "correct": 0,
+    "explanation": "O ar é matéria: possui massa e ocupa espaço. Por isso, acrescentar ar ao balão aumenta a massa do conjunto."
+},
+            {
+    "id": 33,
+    "blockId": "block-6",
+    "blockTitle": "Bloco 6: Matéria e suas Propriedades",
+    "blockBadge": "Matéria & Propriedades",
+    "theme": "block1",
+    "icon": "🟣",
+    "prompt": "Qual item abaixo não é matéria?",
+    "options": [
+        "Água.",
+        "Madeira.",
+        "Luz.",
+        "Ar."
+    ],
+    "correct": 2,
+    "explanation": "A luz é uma forma de energia. Água, madeira e ar são matérias porque possuem massa e ocupam espaço."
+},
+            {
+    "id": 34,
+    "blockId": "block-6",
+    "blockTitle": "Bloco 6: Matéria e suas Propriedades",
+    "blockBadge": "Matéria & Propriedades",
+    "theme": "block1",
+    "icon": "🟣",
+    "prompt": "A massa de um corpo pode ser medida com o auxílio de:",
+    "options": [
+        "Um termômetro.",
+        "Uma balança.",
+        "Uma régua de temperatura.",
+        "Um relógio."
+    ],
+    "correct": 1,
+    "explanation": "A balança é o instrumento usado para medir a massa. A massa costuma ser expressa em gramas ou quilogramas."
+},
+            {
+    "id": 35,
+    "blockId": "block-6",
+    "blockTitle": "Bloco 6: Matéria e suas Propriedades",
+    "blockBadge": "Matéria & Propriedades",
+    "theme": "block1",
+    "icon": "🟣",
+    "prompt": "O espaço ocupado por um corpo recebe o nome de:",
+    "options": [
+        "Volume.",
+        "Temperatura.",
+        "Dureza.",
+        "Massa."
+    ],
+    "correct": 0,
+    "explanation": "Volume é a medida do espaço ocupado por um corpo. A massa, por sua vez, indica a quantidade de matéria."
+},
+            {
+    "id": 36,
+    "blockId": "block-6",
+    "blockTitle": "Bloco 6: Matéria e suas Propriedades",
+    "blockBadge": "Matéria & Propriedades",
+    "theme": "block1",
+    "icon": "🟣",
+    "prompt": "Quando comparamos materiais que flutuam ou afundam na água, uma propriedade importante é:",
+    "options": [
+        "A cor.",
+        "A densidade.",
+        "O brilho.",
+        "O cheiro."
+    ],
+    "correct": 1,
+    "explanation": "A flutuação depende da densidade do material em relação à água. Em geral, materiais menos densos que a água flutuam; os mais densos afundam."
+},
+            {
+    "id": 37,
+    "blockId": "block-6",
+    "blockTitle": "Bloco 6: Matéria e suas Propriedades",
+    "blockBadge": "Matéria & Propriedades",
+    "theme": "block1",
+    "icon": "🟣",
+    "prompt": "A capacidade de um material se dissolver em outro é chamada de:",
+    "options": [
+        "Dureza.",
+        "Elasticidade.",
+        "Solubilidade.",
+        "Massa."
+    ],
+    "correct": 2,
+    "explanation": "Solubilidade é a capacidade de uma substância se dissolver em outra. O sal, por exemplo, apresenta solubilidade em água."
+},
+            {
+    "id": 38,
+    "blockId": "block-6",
+    "blockTitle": "Bloco 6: Matéria e suas Propriedades",
+    "blockBadge": "Matéria & Propriedades",
+    "theme": "block1",
+    "icon": "🟣",
+    "prompt": "Uma pedra ocupa espaço dentro de um recipiente. Essa característica demonstra que ela possui:",
+    "options": [
+        "Somente energia.",
+        "Volume.",
+        "Somente temperatura.",
+        "Ausência de massa."
+    ],
+    "correct": 1,
+    "explanation": "Todo corpo material ocupa espaço, isto é, possui volume. A pedra também tem massa, portanto é matéria."
+},
+            {
+    "id": 39,
+    "blockId": "block-7",
+    "blockTitle": "Bloco 7: Estados Físicos e Mudanças de Estado",
+    "blockBadge": "Estados Físicos",
+    "theme": "block2",
+    "icon": "🧊",
+    "prompt": "Qual estado físico apresenta volume definido, mas assume a forma do recipiente?",
+    "options": [
+        "Sólido.",
+        "Líquido.",
+        "Gasoso.",
+        "Nenhum dos três."
+    ],
+    "correct": 1,
+    "explanation": "Os líquidos têm volume definido, mas não possuem forma própria. Por isso, assumem a forma do recipiente em que estão."
+},
+            {
+    "id": 40,
+    "blockId": "block-7",
+    "blockTitle": "Bloco 7: Estados Físicos e Mudanças de Estado",
+    "blockBadge": "Estados Físicos",
+    "theme": "block2",
+    "icon": "🧊",
+    "prompt": "Quando o gelo derrete e se transforma em água líquida, ocorre:",
+    "options": [
+        "Solidificação.",
+        "Condensação.",
+        "Fusão.",
+        "Sublimação."
+    ],
+    "correct": 2,
+    "explanation": "Fusão é a passagem do estado sólido para o líquido. O gelo recebe energia térmica e derrete."
+},
+            {
+    "id": 41,
+    "blockId": "block-7",
+    "blockTitle": "Bloco 7: Estados Físicos e Mudanças de Estado",
+    "blockBadge": "Estados Físicos",
+    "theme": "block2",
+    "icon": "🧊",
+    "prompt": "A transformação da água líquida em gelo é chamada de:",
+    "options": [
+        "Vaporização.",
+        "Solidificação.",
+        "Fusão.",
+        "Condensação."
+    ],
+    "correct": 1,
+    "explanation": "Solidificação é a passagem do estado líquido para o sólido, como acontece quando a água congela."
+},
+            {
+    "id": 42,
+    "blockId": "block-7",
+    "blockTitle": "Bloco 7: Estados Físicos e Mudanças de Estado",
+    "blockBadge": "Estados Físicos",
+    "theme": "block2",
+    "icon": "🧊",
+    "prompt": "A água fervendo em uma panela passa rapidamente para o estado gasoso. Esse tipo de vaporização é:",
+    "options": [
+        "Ebulição.",
+        "Evaporação lenta.",
+        "Condensação.",
+        "Solidificação."
+    ],
+    "correct": 0,
+    "explanation": "Ebulição é uma vaporização rápida, com formação de bolhas em toda a massa do líquido."
+},
+            {
+    "id": 43,
+    "blockId": "block-7",
+    "blockTitle": "Bloco 7: Estados Físicos e Mudanças de Estado",
+    "blockBadge": "Estados Físicos",
+    "theme": "block2",
+    "icon": "🧊",
+    "prompt": "A roupa molhada seca no varal mesmo sem a água ferver. O processo é:",
+    "options": [
+        "Fusão.",
+        "Evaporação.",
+        "Solidificação.",
+        "Condensação."
+    ],
+    "correct": 1,
+    "explanation": "A evaporação é uma vaporização lenta que ocorre na superfície do líquido e pode acontecer sem fervura."
+},
+            {
+    "id": 44,
+    "blockId": "block-7",
+    "blockTitle": "Bloco 7: Estados Físicos e Mudanças de Estado",
+    "blockBadge": "Estados Físicos",
+    "theme": "block2",
+    "icon": "🧊",
+    "prompt": "A passagem do vapor de água para gotinhas líquidas é denominada:",
+    "options": [
+        "Condensação.",
+        "Fusão.",
+        "Vaporização.",
+        "Sublimação."
+    ],
+    "correct": 0,
+    "explanation": "Na condensação, a matéria passa do estado gasoso para o líquido. É o que acontece quando o vapor encontra uma superfície fria."
+},
+            {
+    "id": 45,
+    "blockId": "block-7",
+    "blockTitle": "Bloco 7: Estados Físicos e Mudanças de Estado",
+    "blockBadge": "Estados Físicos",
+    "theme": "block2",
+    "icon": "🧊",
+    "prompt": "Qual situação representa a sublimação?",
+    "options": [
+        "Gelo derretendo em água.",
+        "Água congelando.",
+        "Naftalina passando gradualmente do sólido para o gasoso.",
+        "Vapor formando gotinhas."
+    ],
+    "correct": 2,
+    "explanation": "Sublimação é a passagem direta entre os estados sólido e gasoso, sem passar pelo líquido. A naftalina é um exemplo estudado desse processo."
+},
+            {
+    "id": 46,
+    "blockId": "block-7",
+    "blockTitle": "Bloco 7: Estados Físicos e Mudanças de Estado",
+    "blockBadge": "Estados Físicos",
+    "theme": "block2",
+    "icon": "🧊",
+    "prompt": "No estado gasoso, a matéria:",
+    "options": [
+        "Tem sempre forma própria.",
+        "Ocupa o espaço disponível e não tem forma nem volume definidos.",
+        "Tem volume fixo e forma fixa.",
+        "Não é formada por partículas."
+    ],
+    "correct": 1,
+    "explanation": "Os gases não têm forma nem volume definidos. Suas partículas ficam mais afastadas e se movimentam livremente, ocupando o espaço disponível."
+},
+            {
+    "id": 47,
+    "blockId": "block-8",
+    "blockTitle": "Bloco 8: Átomos, Elementos e Misturas",
+    "blockBadge": "Substâncias & Misturas",
+    "theme": "block3",
+    "icon": "🧪",
+    "prompt": "O gás oxigênio (O₂) é uma substância simples porque:",
+    "options": [
+        "Contém dois elementos químicos diferentes.",
+        "É formado apenas por átomos do elemento oxigênio.",
+        "É uma mistura de gases.",
+        "Possui água em sua composição."
+    ],
+    "correct": 1,
+    "explanation": "Uma substância simples é formada por átomos de um único elemento químico. No O₂, os dois átomos pertencem ao elemento oxigênio."
+},
+            {
+    "id": 48,
+    "blockId": "block-8",
+    "blockTitle": "Bloco 8: Átomos, Elementos e Misturas",
+    "blockBadge": "Substâncias & Misturas",
+    "theme": "block3",
+    "icon": "🧪",
+    "prompt": "O dióxido de carbono (CO₂) é uma substância composta porque apresenta:",
+    "options": [
+        "Somente átomos de carbono.",
+        "Somente átomos de oxigênio.",
+        "Átomos de carbono e oxigênio.",
+        "Apenas uma fase visível."
+    ],
+    "correct": 2,
+    "explanation": "Substâncias compostas são formadas por mais de um elemento químico. O CO₂ contém carbono (C) e oxigênio (O)."
+},
+            {
+    "id": 49,
+    "blockId": "block-8",
+    "blockTitle": "Bloco 8: Átomos, Elementos e Misturas",
+    "blockBadge": "Substâncias & Misturas",
+    "theme": "block3",
+    "icon": "🧪",
+    "prompt": "Qual alternativa apresenta uma mistura?",
+    "options": [
+        "Oxigênio puro (O₂).",
+        "Ferro puro (Fe).",
+        "Água com açúcar dissolvido.",
+        "Gás hidrogênio puro (H₂)."
+    ],
+    "correct": 2,
+    "explanation": "Água com açúcar dissolvido contém duas substâncias misturadas. As outras opções representam substâncias simples."
+},
+            {
+    "id": 50,
+    "blockId": "block-8",
+    "blockTitle": "Bloco 8: Átomos, Elementos e Misturas",
+    "blockBadge": "Substâncias & Misturas",
+    "theme": "block3",
+    "icon": "🧪",
+    "prompt": "Uma mistura homogênea apresenta:",
+    "options": [
+        "Duas ou mais fases visíveis.",
+        "Apenas uma fase.",
+        "Sempre três componentes.",
+        "Somente materiais sólidos."
+    ],
+    "correct": 1,
+    "explanation": "Misturas homogêneas apresentam aspecto uniforme e uma única fase. Água com sal totalmente dissolvido é um exemplo."
+},
+            {
+    "id": 51,
+    "blockId": "block-8",
+    "blockTitle": "Bloco 8: Átomos, Elementos e Misturas",
+    "blockBadge": "Substâncias & Misturas",
+    "theme": "block3",
+    "icon": "🧪",
+    "prompt": "Água e areia, quando misturadas, formam um sistema:",
+    "options": [
+        "Homogêneo, com uma fase.",
+        "Heterogêneo, com mais de uma fase.",
+        "Formado por uma substância simples.",
+        "Sem componentes."
+    ],
+    "correct": 1,
+    "explanation": "A areia não se dissolve na água e pode ser distinguida dela. Por isso, o sistema é heterogêneo e apresenta mais de uma fase."
+},
+            {
+    "id": 52,
+    "blockId": "block-8",
+    "blockTitle": "Bloco 8: Átomos, Elementos e Misturas",
+    "blockBadge": "Substâncias & Misturas",
+    "theme": "block3",
+    "icon": "🧪",
+    "prompt": "Em água com sal totalmente dissolvido, há:",
+    "options": [
+        "Dois componentes e uma fase.",
+        "Um componente e duas fases.",
+        "Dois componentes e duas fases.",
+        "Uma substância simples."
+    ],
+    "correct": 0,
+    "explanation": "Os componentes são água e sal, portanto são dois. Como o sal se dissolveu completamente, o aspecto é uniforme e há uma fase."
+},
+            {
+    "id": 53,
+    "blockId": "block-8",
+    "blockTitle": "Bloco 8: Átomos, Elementos e Misturas",
+    "blockBadge": "Substâncias & Misturas",
+    "theme": "block3",
+    "icon": "🧪",
+    "prompt": "Água líquida e cubos de gelo são:",
+    "options": [
+        "Duas substâncias diferentes e uma fase.",
+        "Um componente e duas fases.",
+        "Dois componentes e duas fases.",
+        "Uma mistura homogênea."
+    ],
+    "correct": 1,
+    "explanation": "A água líquida e o gelo são a mesma substância (H₂O), portanto há um componente. Como aparecem nos estados líquido e sólido, há duas fases."
+},
+            {
+    "id": 54,
+    "blockId": "block-8",
+    "blockTitle": "Bloco 8: Átomos, Elementos e Misturas",
+    "blockBadge": "Substâncias & Misturas",
+    "theme": "block3",
+    "icon": "🧪",
+    "prompt": "Qual alternativa é um exemplo de mistura heterogênea?",
+    "options": [
+        "Água com sal dissolvido.",
+        "Água com açúcar dissolvido.",
+        "Água e óleo.",
+        "Ar atmosférico."
+    ],
+    "correct": 2,
+    "explanation": "Água e óleo não se misturam uniformemente e formam camadas distintas. Isso caracteriza uma mistura heterogênea."
+},
+            {
+    "id": 55,
+    "blockId": "block-9",
+    "blockTitle": "Bloco 9: Separação de Misturas",
+    "blockBadge": "Separação de Misturas",
+    "theme": "block4",
+    "icon": "🥣",
+    "prompt": "Retirar manualmente pedrinhas de uma porção de feijão é um exemplo de:",
+    "options": [
+        "Catação.",
+        "Filtração.",
+        "Destilação.",
+        "Flotação."
+    ],
+    "correct": 0,
+    "explanation": "Catação é a separação manual dos componentes de uma mistura, como retirar pedrinhas do feijão."
+},
+            {
+    "id": 56,
+    "blockId": "block-9",
+    "blockTitle": "Bloco 9: Separação de Misturas",
+    "blockBadge": "Separação de Misturas",
+    "theme": "block4",
+    "icon": "🥣",
+    "prompt": "Para separar limalha de ferro misturada à areia, o método mais adequado é:",
+    "options": [
+        "Evaporação.",
+        "Separação magnética.",
+        "Decantação.",
+        "Peneiração."
+    ],
+    "correct": 1,
+    "explanation": "A separação magnética utiliza um ímã para atrair materiais como o ferro, separando-os dos que não são atraídos, como a areia."
+},
+            {
+    "id": 57,
+    "blockId": "block-9",
+    "blockTitle": "Bloco 9: Separação de Misturas",
+    "blockBadge": "Separação de Misturas",
+    "theme": "block4",
+    "icon": "🥣",
+    "prompt": "A separação de grãos e cascas com auxílio de uma corrente de ar é chamada de:",
+    "options": [
+        "Levigação.",
+        "Ventilação.",
+        "Filtração.",
+        "Centrifugação."
+    ],
+    "correct": 1,
+    "explanation": "Na ventilação, uma corrente de ar carrega a parte mais leve da mistura, enquanto a parte mais pesada tende a permanecer."
+},
+            {
+    "id": 58,
+    "blockId": "block-9",
+    "blockTitle": "Bloco 9: Separação de Misturas",
+    "blockBadge": "Separação de Misturas",
+    "theme": "block4",
+    "icon": "🥣",
+    "prompt": "Separar areia e pedras usando uma peneira é possível porque os materiais apresentam:",
+    "options": [
+        "Cores diferentes obrigatoriamente.",
+        "Tamanhos de partículas diferentes.",
+        "Atração magnética igual.",
+        "Temperaturas de ebulição diferentes."
+    ],
+    "correct": 1,
+    "explanation": "A peneiração separa sólidos com tamanhos diferentes. As partículas menores passam pelos espaços da peneira e as maiores ficam retidas."
+},
+            {
+    "id": 59,
+    "blockId": "block-9",
+    "blockTitle": "Bloco 9: Separação de Misturas",
+    "blockBadge": "Separação de Misturas",
+    "theme": "block4",
+    "icon": "🥣",
+    "prompt": "Deixar água barrenta em repouso para que a terra se deposite no fundo corresponde à:",
+    "options": [
+        "Sedimentação.",
+        "Sublimação.",
+        "Destilação fracionada.",
+        "Catação."
+    ],
+    "correct": 0,
+    "explanation": "Na sedimentação, partículas sólidas mais densas se depositam no fundo pela ação da gravidade quando a mistura fica em repouso."
+},
+            {
+    "id": 60,
+    "blockId": "block-9",
+    "blockTitle": "Bloco 9: Separação de Misturas",
+    "blockBadge": "Separação de Misturas",
+    "theme": "block4",
+    "icon": "🥣",
+    "prompt": "A separação de água e óleo pode ser feita por:",
+    "options": [
+        "Decantação.",
+        "Peneiração.",
+        "Separação magnética.",
+        "Evaporação do óleo."
+    ],
+    "correct": 0,
+    "explanation": "Água e óleo são líquidos que não se misturam e formam camadas. A decantação permite separar essas fases pela diferença de densidade."
+},
+            {
+    "id": 61,
+    "blockId": "block-9",
+    "blockTitle": "Bloco 9: Separação de Misturas",
+    "blockBadge": "Separação de Misturas",
+    "theme": "block4",
+    "icon": "🥣",
+    "prompt": "Ao coar café, o filtro retém o pó e permite a passagem da bebida. O método é:",
+    "options": [
+        "Flotação.",
+        "Filtração.",
+        "Levigação.",
+        "Catação."
+    ],
+    "correct": 1,
+    "explanation": "Na filtração, o filtro retém partículas sólidas e deixa passar o líquido. No preparo do café, a borra fica no filtro."
+},
+            {
+    "id": 62,
+    "blockId": "block-9",
+    "blockTitle": "Bloco 9: Separação de Misturas",
+    "blockBadge": "Separação de Misturas",
+    "theme": "block4",
+    "icon": "🥣",
+    "prompt": "Na obtenção de sal a partir da água do mar, deixando a água passar para o estado gasoso, utiliza-se:",
+    "options": [
+        "Evaporação.",
+        "Separação magnética.",
+        "Peneiração.",
+        "Centrifugação."
+    ],
+    "correct": 0,
+    "explanation": "Na evaporação, a água passa para o estado gasoso e o sal permanece no recipiente. Esse processo é utilizado nas salinas."
+},
+            {
+    "id": 63,
+    "blockId": "block-10",
+    "blockTitle": "Bloco 10: Tratamento da Água, Esgoto e Reciclagem",
+    "blockBadge": "Saneamento & Meio Ambiente",
+    "theme": "block5",
+    "icon": "🚰",
+    "prompt": "A principal função de uma Estação de Tratamento de Água (ETA) é:",
+    "options": [
+        "Tratar o esgoto das residências.",
+        "Tratar a água captada para torná-la adequada ao abastecimento.",
+        "Separar plástico e papel.",
+        "Produzir biogás a partir do lodo."
+    ],
+    "correct": 1,
+    "explanation": "A ETA trata a água retirada de mananciais, como rios e reservatórios, antes de ela ser distribuída para a população."
+},
+            {
+    "id": 64,
+    "blockId": "block-10",
+    "blockTitle": "Bloco 10: Tratamento da Água, Esgoto e Reciclagem",
+    "blockBadge": "Saneamento & Meio Ambiente",
+    "theme": "block5",
+    "icon": "🚰",
+    "prompt": "Na etapa de coagulação da ETA, são adicionados produtos que ajudam a:",
+    "options": [
+        "Congelar a água.",
+        "Agrupar pequenas partículas de sujeira.",
+        "Transformar água em vapor.",
+        "Aumentar a quantidade de areia."
+    ],
+    "correct": 1,
+    "explanation": "Os coagulantes ajudam a reunir partículas muito pequenas de sujeira. Depois, na floculação, elas formam flocos maiores que podem ser removidos."
+},
+            {
+    "id": 65,
+    "blockId": "block-10",
+    "blockTitle": "Bloco 10: Tratamento da Água, Esgoto e Reciclagem",
+    "blockBadge": "Saneamento & Meio Ambiente",
+    "theme": "block5",
+    "icon": "🚰",
+    "prompt": "Na decantação da ETA, os flocos de sujeira:",
+    "options": [
+        "Sobem e desaparecem no ar.",
+        "Ficam depositados no fundo do tanque.",
+        "Transformam-se em sal.",
+        "São atraídos por ímãs."
+    ],
+    "correct": 1,
+    "explanation": "Durante a decantação, a água fica em repouso e os flocos, mais densos, descem e se acumulam no fundo do tanque."
+},
+            {
+    "id": 66,
+    "blockId": "block-10",
+    "blockTitle": "Bloco 10: Tratamento da Água, Esgoto e Reciclagem",
+    "blockBadge": "Saneamento & Meio Ambiente",
+    "theme": "block5",
+    "icon": "🚰",
+    "prompt": "A filtração na ETA tem como objetivo:",
+    "options": [
+        "Reter partículas que ainda permanecem na água.",
+        "Adicionar areia à água.",
+        "Separar água e óleo por camadas.",
+        "Produzir gás metano."
+    ],
+    "correct": 0,
+    "explanation": "Na filtração, a água passa por materiais filtrantes que retêm partículas de sujeira que não foram removidas nas etapas anteriores."
+},
+            {
+    "id": 67,
+    "blockId": "block-10",
+    "blockTitle": "Bloco 10: Tratamento da Água, Esgoto e Reciclagem",
+    "blockBadge": "Saneamento & Meio Ambiente",
+    "theme": "block5",
+    "icon": "🚰",
+    "prompt": "A etapa de desinfecção da água tem como finalidade principal:",
+    "options": [
+        "Eliminar ou inativar microrganismos que podem causar doenças.",
+        "Retirar pedras grandes por peneiração.",
+        "Transformar a água em gelo.",
+        "Separar o sal dissolvido."
+    ],
+    "correct": 0,
+    "explanation": "A desinfecção, frequentemente realizada com cloro, reduz ou elimina microrganismos que podem causar doenças e ajuda a tornar a água segura."
+},
+            {
+    "id": 68,
+    "blockId": "block-10",
+    "blockTitle": "Bloco 10: Tratamento da Água, Esgoto e Reciclagem",
+    "blockBadge": "Saneamento & Meio Ambiente",
+    "theme": "block5",
+    "icon": "🚰",
+    "prompt": "A sigla ETE corresponde a:",
+    "options": [
+        "Estação de Tratamento de Energia.",
+        "Estação de Tratamento de Esgoto.",
+        "Estação de Transporte Especial.",
+        "Estação de Triagem de Embalagens."
+    ],
+    "correct": 1,
+    "explanation": "A ETE recebe e trata o esgoto doméstico ou industrial antes de sua destinação, reduzindo a quantidade de poluentes lançados no ambiente."
+},
+            {
+    "id": 69,
+    "blockId": "block-10",
+    "blockTitle": "Bloco 10: Tratamento da Água, Esgoto e Reciclagem",
+    "blockBadge": "Saneamento & Meio Ambiente",
+    "theme": "block5",
+    "icon": "🚰",
+    "prompt": "Os digestores anaeróbios tratam parte do lodo utilizando microrganismos que atuam:",
+    "options": [
+        "Na ausência de oxigênio.",
+        "Somente sob luz solar.",
+        "Dentro de água congelada.",
+        "Com auxílio de ímãs."
+    ],
+    "correct": 0,
+    "explanation": "Anaeróbios são microrganismos que realizam a decomposição sem utilizar oxigênio. Nesse processo pode ser produzido biogás."
+},
+            {
+    "id": 70,
+    "blockId": "block-10",
+    "blockTitle": "Bloco 10: Tratamento da Água, Esgoto e Reciclagem",
+    "blockBadge": "Saneamento & Meio Ambiente",
+    "theme": "block5",
+    "icon": "🚰",
+    "prompt": "Na coleta seletiva, a cor azul é normalmente utilizada para identificar recipientes destinados a:",
+    "options": [
+        "Vidro.",
+        "Metal.",
+        "Papel e papelão.",
+        "Resíduos orgânicos."
+    ],
+    "correct": 2,
+    "explanation": "Na identificação usual da coleta seletiva, a cor azul corresponde a papel e papelão. Verde indica vidro, amarelo metal, vermelho plástico e marrom resíduos orgânicos."
+}
+        ];
+
+        /* ==========================================================================
+           ESTADO DA APLICAÇÃO
+           ========================================================================== */
+        let userAnswers = {}; // Armazena respostas: { questionId: { selected: number, isCorrect: boolean } }
+        let scoreCorrect = 0;
+        let scoreWrong = 0;
+
+        /* Estilos e Cores para cada Bloco Temático */
+        const themeStyles = {
+            block1: {
+                bg: "bg-indigo-50/60",
+                border: "border-indigo-200",
+                badge: "bg-indigo-600 text-white",
+                btnBg: "bg-white border-indigo-200 hover:border-indigo-400 text-indigo-950",
+                title: "text-indigo-900"
+            },
+            block2: {
+                bg: "bg-sky-50/60",
+                border: "border-sky-200",
+                badge: "bg-sky-600 text-white",
+                btnBg: "bg-white border-sky-200 hover:border-sky-400 text-sky-950",
+                title: "text-sky-900"
+            },
+            block3: {
+                bg: "bg-emerald-50/60",
+                border: "border-emerald-200",
+                badge: "bg-emerald-600 text-white",
+                btnBg: "bg-white border-emerald-200 hover:border-emerald-400 text-emerald-950",
+                title: "text-emerald-900"
+            },
+            block4: {
+                bg: "bg-amber-50/60",
+                border: "border-amber-200",
+                badge: "bg-amber-600 text-white",
+                btnBg: "bg-white border-amber-200 hover:border-amber-400 text-amber-950",
+                title: "text-amber-900"
+            },
+            block5: {
+                bg: "bg-pink-50/60",
+                border: "border-pink-200",
+                badge: "bg-pink-600 text-white",
+                btnBg: "bg-white border-pink-200 hover:border-pink-400 text-pink-950",
+                title: "text-pink-900"
+            }
+        };
+
+        /* ==========================================================================
+           INICIALIZAÇÃO E RENDERIZAÇÃO
+           ========================================================================== */
+        window.addEventListener('DOMContentLoaded', () => {
+            renderQuiz();
+        });
+
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = '';
+
+            let currentBlockId = "";
+
+            quizQuestions.forEach((q, index) => {
+                const style = themeStyles[q.theme];
+
+                // Insere título do bloco se mudou de bloco
+                if (q.blockId !== currentBlockId) {
+                    currentBlockId = q.blockId;
+                    const blockHeader = document.createElement('div');
+                    blockHeader.id = q.blockId;
+                    blockHeader.className = "pt-4 scroll-mt-24";
+                    const blockEnd = quizQuestions.reduce((last, item, itemIndex) => item.blockId === q.blockId ? itemIndex + 1 : last, index + 1);
+                    blockHeader.innerHTML = `
+                        <div class="flex items-center gap-3 mb-4 pb-2 border-b-2 border-slate-200">
+                            <span class="text-3xl">${q.icon}</span>
+                            <div>
+                                <h2 class="text-xl sm:text-2xl font-black font-display ${style.title}">
+                                    ${q.blockTitle}
+                                </h2>
+                                <p class="text-xs text-slate-500 font-semibold">Questões ${index + 1} a ${blockEnd}</p>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(blockHeader);
+                }
+
+                // Cria o Card da Questão
+                const qCard = document.createElement('div');
+                qCard.className = `p-5 sm:p-7 rounded-3xl border-2 ${style.border} ${style.bg} shadow-card transition-all duration-300 relative`;
+                qCard.id = `card-q-${q.id}`;
+
+                const letters = ['A', 'B', 'C', 'D'];
+
+                let optionsHTML = q.options.map((opt, optIdx) => {
+                    return `
+                        <button 
+                            id="btn-q-${q.id}-opt-${optIdx}"
+                            onclick="selectOption(${q.id}, ${optIdx})"
+                            class="btn-option w-full p-4 rounded-2xl border-2 ${style.btnBg} font-semibold text-sm sm:text-base text-left flex items-start gap-3 relative group"
+                        >
+                            <span class="w-7 h-7 rounded-xl bg-slate-100 group-hover:bg-slate-200 text-slate-700 font-black flex items-center justify-center shrink-0 text-xs border border-slate-300 transition" id="badge-q-${q.id}-opt-${optIdx}">
+                                ${letters[optIdx]}
+                            </span>
+                            <span class="flex-grow pt-0.5" id="text-q-${q.id}-opt-${optIdx}">${opt}</span>
+                            <span class="hidden text-lg" id="icon-q-${q.id}-opt-${optIdx}"></span>
+                        </button>
+                    `;
+                }).join('');
+
+                qCard.innerHTML = `
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                        <span class="px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider ${style.badge}">
+                            Questão ${q.id} de 70 • ${q.blockBadge}
+                        </span>
+                        <span id="status-tag-q-${q.id}" class="text-xs font-bold text-slate-400 bg-white/80 px-2.5 py-1 rounded-lg border border-slate-200">
+                            Aguardando resposta
+                        </span>
+                    </div>
+
+                    <h3 class="text-base sm:text-lg font-extrabold text-slate-800 mb-5 leading-snug">
+                        ${q.prompt}
+                    </h3>
+
+                    <div class="grid grid-cols-1 gap-3">
+                        ${optionsHTML}
+                    </div>
+
+                    <!-- Linha inferior com Botão de Explicação -->
+                    <div class="mt-5 pt-4 border-t border-slate-200/60 flex flex-wrap items-center justify-between gap-3">
+                        <span class="text-xs text-slate-500 font-semibold italic" id="hint-text-q-${q.id}">
+                            Escolha uma alternativa para responder.
+                        </span>
+                        
+                        <button 
+                            id="btn-exp-q-${q.id}"
+                            onclick="openExpModal(${q.id})"
+                            disabled
+                            class="px-4 py-2.5 bg-slate-200 text-slate-400 cursor-not-allowed rounded-xl font-black text-xs transition flex items-center gap-2 border border-slate-300 shadow-sm"
+                        >
+                            <span>💡</span> Ver Explicação
+                        </button>
+                    </div>
+                `;
+
+                container.appendChild(qCard);
+            });
+        }
+
+        /* ==========================================================================
+           LÓGICA DE SELEÇÃO E RESPOSTA
+           ========================================================================== */
+        function selectOption(qId, selectedIdx) {
+            // Se já respondeu essa questão, bloqueia novo clique
+            if (userAnswers[qId]) return;
+
+            const q = quizQuestions.find(item => item.id === qId);
+            const isCorrect = (selectedIdx === q.correct);
+
+            // Grava no estado
+            userAnswers[qId] = { selected: selectedIdx, isCorrect: isCorrect };
+
+            if (isCorrect) {
+                scoreCorrect++;
+            } else {
+                scoreWrong++;
+            }
+
+            // Atualiza placar topo
+            updateHeaderScore();
+
+            // Desabilita todos os botões de opção dessa questão
+            for (let i = 0; i < 4; i++) {
+                const btn = document.getElementById(`btn-q-${qId}-opt-${i}`);
+                btn.disabled = true;
+                btn.classList.add('cursor-default');
+            }
+
+            // Destaca a opção clicada e a opção correta
+            const selectedBtn = document.getElementById(`btn-q-${qId}-opt-${selectedIdx}`);
+            const selectedBadge = document.getElementById(`badge-q-${qId}-opt-${selectedIdx}`);
+            const selectedIcon = document.getElementById(`icon-q-${qId}-opt-${selectedIdx}`);
+            const statusTag = document.getElementById(`status-tag-q-${qId}`);
+
+            if (isCorrect) {
+                // Fica VERDE com Check
+                selectedBtn.className = "btn-option w-full p-4 rounded-2xl border-2 border-emerald-500 bg-emerald-100 text-emerald-950 font-bold text-sm sm:text-base text-left flex items-start gap-3 relative animate-pop-in shadow-md";
+                selectedBadge.className = "w-7 h-7 rounded-xl bg-emerald-600 text-white font-black flex items-center justify-center shrink-0 text-xs shadow";
+                selectedIcon.className = "text-emerald-600 text-lg block font-black";
+                selectedIcon.innerHTML = `<i class="fa-solid fa-circle-check"></i>`;
+                
+                statusTag.className = "text-xs font-black text-emerald-700 bg-emerald-100 px-3 py-1 rounded-lg border border-emerald-300 flex items-center gap-1";
+                statusTag.innerHTML = `<i class="fa-solid fa-check"></i> Correto! 🎉`;
+            } else {
+                // Clicou errado: Fica VERMELHO com X
+                selectedBtn.className = "btn-option w-full p-4 rounded-2xl border-2 border-rose-500 bg-rose-100 text-rose-950 font-bold text-sm sm:text-base text-left flex items-start gap-3 relative animate-pop-in shadow-md";
+                selectedBadge.className = "w-7 h-7 rounded-xl bg-rose-600 text-white font-black flex items-center justify-center shrink-0 text-xs shadow";
+                selectedIcon.className = "text-rose-600 text-lg block font-black";
+                selectedIcon.innerHTML = `<i class="fa-solid fa-circle-xmark"></i>`;
+
+                // Destaca também a opção CORRETA em verde para aprendizado imediato
+                const correctBtn = document.getElementById(`btn-q-${qId}-opt-${q.correct}`);
+                const correctBadge = document.getElementById(`badge-q-${qId}-opt-${q.correct}`);
+                const correctIcon = document.getElementById(`icon-q-${qId}-opt-${q.correct}`);
+
+                correctBtn.className = "btn-option w-full p-4 rounded-2xl border-2 border-emerald-500 bg-emerald-50 text-emerald-950 font-bold text-sm sm:text-base text-left flex items-start gap-3 relative";
+                correctBadge.className = "w-7 h-7 rounded-xl bg-emerald-500 text-white font-black flex items-center justify-center shrink-0 text-xs";
+                correctIcon.className = "text-emerald-600 text-lg block font-black";
+                correctIcon.innerHTML = `<i class="fa-solid fa-circle-check"></i>`;
+
+                statusTag.className = "text-xs font-black text-rose-700 bg-rose-100 px-3 py-1 rounded-lg border border-rose-300 flex items-center gap-1";
+                statusTag.innerHTML = `<i class="fa-solid fa-xmark"></i> Incorreto 😅`;
+            }
+
+            // Habilita o botão "💡 Ver Explicação"
+            const expBtn = document.getElementById(`btn-exp-q-${qId}`);
+            expBtn.disabled = false;
+            expBtn.className = "px-4 py-2.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-black text-xs rounded-xl shadow-md transition transform hover:scale-105 flex items-center gap-2 cursor-pointer animate-bounce-short";
+
+            const hintText = document.getElementById(`hint-text-q-${qId}`);
+            hintText.innerText = "Clique ao lado para entender o gabarito comentado! 👇";
+            hintText.className = "text-xs text-amber-700 font-bold";
+
+            // Verifica se terminou todas as 30 questões
+            if (Object.keys(userAnswers).length === 70) {
+                setTimeout(showFinalSummary, 600);
+            }
+        }
+
+        /* ==========================================================================
+           ATUALIZAÇÃO DE PLACAR E PROGRESSO
+           ========================================================================== */
+        function updateHeaderScore() {
+            const answeredCount = Object.keys(userAnswers).length;
+            document.getElementById('score-correct').innerText = scoreCorrect;
+            document.getElementById('score-wrong').innerText = scoreWrong;
+            document.getElementById('score-total').innerText = answeredCount;
+
+            const percentage = Math.round((answeredCount / 70) * 100);
+            document.getElementById('progress-bar').style.width = `${percentage}%`;
+            document.getElementById('progress-text').innerText = `${percentage}% Concluído`;
+        }
+
+        /* ==========================================================================
+           EXIBIÇÃO DE MODAIS (EXPLICAÇÃO E DICAS)
+           ========================================================================== */
+        function openExpModal(qId) {
+            const q = quizQuestions.find(item => item.id === qId);
+            const letters = ['A', 'B', 'C', 'D'];
+
+            document.getElementById('modal-exp-qnum').innerText = `Explicação — Questão ${q.id}`;
+            document.getElementById('modal-exp-block').innerText = q.blockTitle;
+            document.getElementById('modal-exp-prompt').innerText = q.prompt;
+            document.getElementById('modal-exp-correct').innerText = `${letters[q.correct]}) ${q.options[q.correct]}`;
+            document.getElementById('modal-exp-text').innerHTML = `<p>${q.explanation}</p>`;
+
+            const modal = document.getElementById('modal-explanation');
+            const box = document.getElementById('modal-exp-box');
+            
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.classList.add('opacity-100');
+            box.classList.remove('scale-95');
+            box.classList.add('scale-100');
+        }
+
+        function closeExpModal() {
+            const modal = document.getElementById('modal-explanation');
+            const box = document.getElementById('modal-exp-box');
+            
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.classList.remove('opacity-100');
+            box.classList.add('scale-95');
+            box.classList.remove('scale-100');
+        }
+
+        function openTipsModal() {
+            const modal = document.getElementById('modal-tips');
+            const box = document.getElementById('modal-tips-box');
+            
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.classList.add('opacity-100');
+            box.classList.remove('scale-95');
+            box.classList.add('scale-100');
+        }
+
+        function closeTipsModal() {
+            const modal = document.getElementById('modal-tips');
+            const box = document.getElementById('modal-tips-box');
+            
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.classList.remove('opacity-100');
+            box.classList.add('scale-95');
+            box.classList.remove('scale-100');
+        }
+
+        // Fechar ao clicar fora do modal ou pressionar ESC
+        window.onclick = function(event) {
+            const expModal = document.getElementById('modal-explanation');
+            const tipsModal = document.getElementById('modal-tips');
+            if (event.target === expModal) closeExpModal();
+            if (event.target === tipsModal) closeTipsModal();
+        }
+
+        window.onkeydown = function(event) {
+            if (event.key === 'Escape') {
+                closeExpModal();
+                closeTipsModal();
+            }
+        }
+
+        /* ==========================================================================
+           ROUTING SUAVE ATÉ OS BLOCOS TEMÁTICOS
+           ========================================================================== */
+        function scrollToBlock(blockId) {
+            const el = document.getElementById(blockId);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        /* ==========================================================================
+           RESUMO FINAL E REINÍCIO DO QUIZ
+           ========================================================================== */
+        function showFinalSummary() {
+            const card = document.getElementById('final-summary-card');
+            card.classList.remove('hidden');
+            card.scrollIntoView({ behavior: 'smooth' });
+
+            const percentage = Math.round((scoreCorrect / 70) * 100);
+            document.getElementById('summary-correct').innerText = scoreCorrect;
+            document.getElementById('summary-wrong').innerText = scoreWrong;
+            document.getElementById('summary-score').innerText = `${percentage}%`;
+
+            const titleEl = document.getElementById('summary-title');
+            const msgEl = document.getElementById('summary-message');
+
+            if (percentage >= 90) {
+                titleEl.innerText = "🌟 Cientista Extraordinário!";
+                msgEl.innerText = "Excelente! Você domina perfeitamente Matéria, Misturas, Fases e Saneamento. Nota 10 garantida na prova!";
+            } else if (percentage >= 70) {
+                titleEl.innerText = "🚀 Grande Desempenho!";
+                msgEl.innerText = "Muito bem! Seu conhecimento em Ciências do 6º Ano está afiado. Dê uma conferida rápida nas questões que errou!";
+            } else if (percentage >= 50) {
+                titleEl.innerText = "📚 Bom Trabalho!";
+                msgEl.innerText = "Você respondeu bem, mas vale a pena revisar as 'Dicas de Ouro' sobre fases, misturas e saneamento para tirar a nota máxima!";
+            } else {
+                titleEl.innerText = "💡 Não desista! Treino é tudo!";
+                msgEl.innerText = "Ciências é uma aventura! Clique em 'Dicas de Ouro', leia as explicações das questões e tente novamente.";
+            }
+        }
+
+        function resetQuizWithConfirm() {
+            if (Object.keys(userAnswers).length > 0) {
+                if (confirm("Tem certeza de que deseja reiniciar o simulado? Seu progresso atual será zerado.")) {
+                    resetQuiz();
+                }
+            } else {
+                resetQuiz();
+            }
+        }
+
+        function resetQuiz() {
+            userAnswers = {};
+            scoreCorrect = 0;
+            scoreWrong = 0;
+            updateHeaderScore();
+            document.getElementById('final-summary-card').classList.add('hidden');
+            renderQuiz();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
